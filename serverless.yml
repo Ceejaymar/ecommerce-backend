@@ -11,6 +11,10 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  environment: ${file(env.yml):${self:custom.stage}, file(env.yml):default}
+
+environment:
+  stripeSecretKey: ${self:custom.environment.stripeSecretKey}
 
 provider:
   name: aws
