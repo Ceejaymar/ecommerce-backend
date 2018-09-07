@@ -8,6 +8,7 @@ plugins:
 # serverless-webpack configuration
 # Enable auto-packing of external modules
 custom:
+  stage: ${opt:stage, self:provider.stage}
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
@@ -99,3 +100,12 @@ functions:
   #         method: delete
   #         cors: true
   #         authorizer: aws_iam
+
+    billing:
+      handler: billing.main
+      events:
+        - http:
+            path: billing
+            method: post
+            cors: true
+            authorizer: aws_iam
